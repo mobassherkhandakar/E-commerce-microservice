@@ -2,12 +2,7 @@ import express, { RequestHandler } from 'express';
 import cors from 'cors';
 import morgan from 'morgan'
 import dotenv from 'dotenv';
-import {
-    createInventory,
-    getInventoryById,
-    getInventoryDetails,
-    updateInventory
-} from './controllers';
+
 dotenv.config()
 
 const app = express();
@@ -23,10 +18,7 @@ app.get("/health", (_req, res) => {
 
 // Endpoint to get inventory items
 
-app.get("/inventories/:id/details", getInventoryDetails as RequestHandler)
-app.get('/inventories/:id', getInventoryById as RequestHandler)
-app.put("/inventories/:id", updateInventory as RequestHandler)
-app.post("/inventories", createInventory as RequestHandler);
+
 
 
 // 404 handler
@@ -42,8 +34,8 @@ app.use((err, _req, res, _next) => {
     res.status(500).json({ message: "Something broke!" });
 });
 
-const port = process.env.PORT || 4002
-const serviceName = process.env.SERVICE_NAME || "Inventory-Service";
+const port = process.env.PORT || 4001
+const serviceName = process.env.SERVICE_NAME || "Product-Service";
 
 app.listen(port, () => {
     console.log(`${serviceName} is running on port ${port}`);

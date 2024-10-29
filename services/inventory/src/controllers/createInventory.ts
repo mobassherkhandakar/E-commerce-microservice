@@ -2,7 +2,7 @@ import prisma from "@/prisma";
 import { InventoryCreateDTOSchema } from "@/schema";
 import { NextFunction, Request, RequestHandler, Response } from "express";
 
-const createInventory = async (
+export const createInventory = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -36,4 +36,3 @@ const createInventory = async (
         next(error);
     }
 }
-export default createInventory

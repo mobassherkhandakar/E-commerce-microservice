@@ -2,7 +2,12 @@ import express, { RequestHandler } from 'express';
 import cors from 'cors';
 import morgan from 'morgan'
 import dotenv from 'dotenv';
-import createInventory from './controllers/createInventory';
+import {
+    createInventory,
+    getInventoryById,
+    getInventoryDetails,
+    updateInventory
+} from './controllers';
 dotenv.config()
 
 const app = express();
@@ -18,7 +23,11 @@ app.get("/health", (_req, res) => {
 
 // Endpoint to get inventory items
 
+app.get("/inventories/:id/details", getInventoryDetails as RequestHandler)
+app.get('/inventories/:id', getInventoryById as RequestHandler)
+app.put("/inventories/:id", updateInventory as RequestHandler)
 app.post("/inventories", createInventory as RequestHandler);
+
 
 // 404 handler
 

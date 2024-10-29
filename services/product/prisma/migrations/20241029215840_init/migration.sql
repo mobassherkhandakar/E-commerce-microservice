@@ -6,7 +6,7 @@ CREATE TABLE "Product" (
     "id" TEXT NOT NULL,
     "sku" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
+    "description" TEXT,
     "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "inventoryId" TEXT,
     "status" "Status" NOT NULL DEFAULT 'DRAFT',

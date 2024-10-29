@@ -2,6 +2,7 @@ import express, { RequestHandler } from 'express';
 import cors from 'cors';
 import morgan from 'morgan'
 import dotenv from 'dotenv';
+import { createProduct, getProductDetails, getProducts, updateProducts } from './controllers';
 
 dotenv.config()
 
@@ -18,7 +19,10 @@ app.get("/health", (_req, res) => {
 
 // Endpoint to get inventory items
 
-
+app.get("/products/:id", getProductDetails as RequestHandler)
+app.put("/products/:id", updateProducts as RequestHandler)
+app.get("/products", getProducts as RequestHandler)
+app.post("/products", createProduct as RequestHandler)
 
 
 // 404 handler

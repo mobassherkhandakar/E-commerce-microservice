@@ -17,7 +17,7 @@ model Product {
   id          String   @id @default(cuid())
   sku         String   @unique
   name        String
-  description String
+  description String?
   price       Float    @default(0)
   inventoryId String?
   status      Status   @default(DRAFT)

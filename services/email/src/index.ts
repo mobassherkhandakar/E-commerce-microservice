@@ -2,7 +2,7 @@ import express, { RequestHandler } from 'express';
 import cors from 'cors';
 import morgan from 'morgan'
 import dotenv from 'dotenv';
-import { createUser, getUserById } from './controllers';
+import { getEmails, sendEmail } from './controllers';
 
 dotenv.config()
 
@@ -17,21 +17,10 @@ app.get("/health", (_req, res) => {
     res.status(200).json({ status: "UP" })
 })
 
-// app.use((req, res, next) => {
-// 	const allowedOrigins = ['http://localhost:8081', 'http://127.0.0.1:8081'];
-// 	const origin = req.headers.origin || '';
-
-// 	if (allowedOrigins.includes(origin)) {
-// 		res.setHeader('Access-Control-Allow-Origin', origin);
-// 		next();
-// 	} else {
-// 		res.status(403).json({ message: 'Forbidden' });
-// 	}
-// });
-
 // Endpoint to get inventory items
-app.get("/users/:id", getUserById as RequestHandler)
-app.post("/users", createUser as RequestHandler)
+
+app.post('/emails/send', sendEmail as RequestHandler);
+app.get('/emails', getEmails as RequestHandler);
 
 
 // 404 handler
@@ -47,8 +36,8 @@ app.use((err, _req, res, _next) => {
     res.status(500).json({ message: "Something broke!" });
 });
 
-const port = process.env.PORT || 4000
-const serviceName = process.env.SERVICE_NAME || "User-Service";
+const port = process.env.PORT || 4005
+const serviceName = process.env.SERVICE_NAME || "Email-Service";
 
 app.listen(port, () => {
     console.log(`${serviceName} is running on port ${port}`);

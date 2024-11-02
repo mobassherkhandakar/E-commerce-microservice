@@ -2,7 +2,9 @@ import express, { RequestHandler } from 'express';
 import cors from 'cors';
 import morgan from 'morgan'
 import dotenv from 'dotenv';
-import { createUser, getUserById } from './controllers';
+import {
+    userRegistration
+} from './controllers';
 
 dotenv.config()
 
@@ -30,14 +32,17 @@ app.get("/health", (_req, res) => {
 // });
 
 // Endpoint to get inventory items
-app.get("/users/:id", getUserById as RequestHandler)
-app.post("/users", createUser as RequestHandler)
+
+app.post("/auth/register", userRegistration as RequestHandler)
 
 
 // 404 handler
 
-app.use((_req, res, next) => {
-    res.status(404).json({ message: "Not Found" });
+app.use((req, res, next) => {
+    res.status(404).json({
+        message: "Not Found",
+        path: req.originalUrl
+    });
 });
 
 // Error handler
@@ -47,8 +52,8 @@ app.use((err, _req, res, _next) => {
     res.status(500).json({ message: "Something broke!" });
 });
 
-const port = process.env.PORT || 4000
-const serviceName = process.env.SERVICE_NAME || "User-Service";
+const port = process.env.PORT || 4003
+const serviceName = process.env.SERVICE_NAME || "Auth-Service";
 
 app.listen(port, () => {
     console.log(`${serviceName} is running on port ${port}`);

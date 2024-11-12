@@ -7,19 +7,24 @@
             "path": "/products",
             "methods": [
               "get"
-            ]
+            ],
+            "middlewares": []
           },
           {
             "path": "/products",
             "methods": [
               "post"
-            ]
+            ],
+            "middlewares": [
+            "auth"
+          ]
           },
           {
             "path": "/products/:id",
             "methods": [
               "get"
-            ]
+            ],
+            "middlewares": []
           }
         ]
       },
@@ -30,13 +35,19 @@
             "path": "/inventories/:id",
             "methods": [
               "put"
-            ]
+            ],
+            "middlewares": [
+            "auth"
+          ]
           },
           {
             "path": "/inventories/:id/details",
             "methods": [
               "get"
-            ]
+            ],
+            "middlewares": [
+            "auth"
+          ]
           }
         ]
       },
@@ -47,25 +58,29 @@
             "path": "/auth/register",
             "methods": [
               "post"
-            ]
+            ],
+            "middlewares": []
           },
           {
             "path": "/auth/login",
             "methods": [
               "post"
-            ]
+            ],
+            "middlewares": []
           },
           {
             "path": "/auth/verify-email",
             "methods": [
               "post"
-            ]
+            ],
+            "middlewares": []
           },
           {
             "path": "/auth/verify-token",
             "methods": [
               "post"
-            ]
+            ],
+            "middlewares": []
           }
         ]
       },
@@ -76,7 +91,10 @@
             "path": "/users/:id",
             "methods": [
               "get"
-            ]
+            ],
+            "middlewares": [
+            "auth"
+          ]
           }
         ]
       }

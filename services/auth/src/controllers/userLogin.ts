@@ -23,7 +23,7 @@ const createLoginHistory = async (info: LoginHistory) => {
     });
 };
 
-const userLogin = async (
+export const userLogin = async (
     req: Request,
     res: Response,
     next: NextFunction

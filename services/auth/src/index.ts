@@ -3,7 +3,10 @@ import cors from 'cors';
 import morgan from 'morgan'
 import dotenv from 'dotenv';
 import {
-    userRegistration
+    userLogin,
+    userRegistration,
+    verifyEmail,
+    verifyToken
 } from './controllers';
 
 dotenv.config()
@@ -34,6 +37,9 @@ app.get("/health", (_req, res) => {
 // Endpoint to get inventory items
 
 app.post("/auth/register", userRegistration as RequestHandler)
+app.post("/auth/login", userLogin as RequestHandler)
+app.post("/auth/verify-token", verifyToken as RequestHandler)
+app.post("/auth/verify-email", verifyEmail as RequestHandler)
 
 
 // 404 handler
